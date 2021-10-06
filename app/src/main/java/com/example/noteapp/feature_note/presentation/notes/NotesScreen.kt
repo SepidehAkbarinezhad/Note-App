@@ -28,7 +28,7 @@ fun NotesScreen(
     navController: NavController,
     viewModel: NotesViewModel
 ) {
-    val state = viewModel.state.value
+    val noteState = viewModel.notesState.value
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -64,23 +64,22 @@ fun NotesScreen(
                 }
             }
             AnimatedVisibility(
-                visible = state.isOrderSectionVisible,
+                visible = noteState.isOrderSectionVisible,
                 enter = slideInVertically() + fadeIn(),
                 exit = slideOutVertically() + fadeOut()
             ) {
-
                 OrderSelection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    noteOrder = state.noteOrder,
+                    noteOrder = noteState.noteOrder,
                     onOrderChanged = {
                         viewModel.onEvent(NotesEvent.Order(it))
                     })
             }
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                items(state.notes) { note ->
+                items(noteState.notes) { note ->
                     NoteItem(note = note,
                         modifier = Modifier
                             .fillMaxWidth()
