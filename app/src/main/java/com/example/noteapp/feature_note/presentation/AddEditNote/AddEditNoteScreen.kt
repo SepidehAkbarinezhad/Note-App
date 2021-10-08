@@ -19,9 +19,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.noteapp.R
+import com.example.noteapp.core.util.TestTag.Content_TEXT_FIELD
+import com.example.noteapp.core.util.TestTag.TITLE_TEXT_FIELD
 import com.example.noteapp.feature_note.domain.entity.Note
 import com.example.noteapp.feature_note.presentation.AddEditNote.compose.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -65,7 +70,7 @@ fun AddEditNoteScreen(
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
-                Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
+                Icon(imageVector = Icons.Default.Save, contentDescription = stringResource(R.string.save_note))
             }
         },
         scaffoldState = scaffoldState
@@ -123,7 +128,9 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.h5
+                textStyle = MaterialTheme.typography.h5,
+                modifier = Modifier.fillMaxWidth() ,
+                testTag = TITLE_TEXT_FIELD
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
@@ -137,7 +144,8 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.body1,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.fillMaxWidth() ,
+                testTag = Content_TEXT_FIELD
             )
         }
     }

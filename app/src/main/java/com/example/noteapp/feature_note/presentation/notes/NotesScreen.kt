@@ -47,7 +47,7 @@ fun NotesScreen(
                 },
                 backgroundColor = Color.White
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
+                Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(R.string.add_note))
             }
         }
     ) {
