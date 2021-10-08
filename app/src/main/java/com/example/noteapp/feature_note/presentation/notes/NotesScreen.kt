@@ -14,9 +14,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.noteapp.R
+import com.example.noteapp.core.util.TestTag.ORDER_SECTION
 import com.example.noteapp.feature_note.presentation.notes.components.NoteItem
 import com.example.noteapp.feature_note.presentation.notes.components.OrderSelection
 import com.example.noteapp.feature_note.presentation.util.Screen
@@ -62,7 +66,7 @@ fun NotesScreen(
                     style = MaterialTheme.typography.h4
                 )
                 IconButton(onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }) {
-                    Icon(imageVector = Icons.Default.Menu, contentDescription = "Sort notes")
+                    Icon(imageVector = Icons.Default.Menu, contentDescription = stringResource(R.string.sort_notes))
                 }
             }
             AnimatedVisibility(
@@ -74,7 +78,8 @@ fun NotesScreen(
                 OrderSelection(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .testTag(ORDER_SECTION),
                     noteOrder = state.noteOrder,
                     onOrderChanged = {
                         viewModel.onEvent(NotesEvent.Order(it))
