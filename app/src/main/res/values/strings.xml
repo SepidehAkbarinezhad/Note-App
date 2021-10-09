@@ -3,4 +3,5 @@
     <string name="sort_notes">Sort notes</string>
     <string name="add_note">Add note</string>
     <string name="save_note">Save note</string>
+    <string name="note_item">note item</string>
 </resources>

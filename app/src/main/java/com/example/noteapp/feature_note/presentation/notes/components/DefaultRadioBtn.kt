@@ -9,6 +9,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -19,11 +21,19 @@ fun DefaultRadioButton(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier,
-    verticalAlignment = Alignment.CenterVertically) {
-        RadioButton(selected = selected, onClick = onSelect)
-        Text(text = text ,
-        Modifier.padding(start = 4.dp))
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(selected = selected,
+            onClick = onSelect,
+            modifier = Modifier.semantics {
+                contentDescription = text
+            })
+        Text(
+            text = text,
+            Modifier.padding(start = 4.dp)
+        )
     }
 }
 

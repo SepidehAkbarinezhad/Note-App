@@ -129,6 +129,45 @@ class NotesEndToEndTest {
         //make sure the update was applied to list
         composeRule.onNodeWithText("test content_edited").assertIsDisplayed()
 
+    }
+
+    @Test
+    fun saveNewNotes_orderByTitleDescending() {
+        for (i in 1..3) {
+
+            //click on fab to get to AddNoteScreen
+            composeRule.onNodeWithContentDescription(context.getString(R.string.add_note))
+                .performClick()
+
+            //enter texts in title and content textFields
+            composeRule
+                .onNodeWithTag(TestTag.TITLE_TEXT_FIELD)
+                .performTextInput(i.toString())
+            composeRule
+                .onNodeWithTag(TestTag.Content_TEXT_FIELD)
+                .performTextInput(i.toString())
+            //save the new note
+            composeRule
+                .onNodeWithContentDescription(context.getString(R.string.save_note))
+                .performClick()
+
+        }
+        composeRule.onNodeWithText("1").assertIsDisplayed()
+        composeRule.onNodeWithText("2").assertIsDisplayed()
+        composeRule.onNodeWithText("3").assertIsDisplayed()
+
+        composeRule.onNodeWithContentDescription(context.getString(R.string.sort_notes))
+        composeRule.onNodeWithContentDescription("Title")
+        composeRule.onNodeWithContentDescription("Descending")
+
+        composeRule.onAllNodesWithTag(TestTag.NOTE_ITEM)[0]
+            .assertTextContains("3")
+        composeRule.onAllNodesWithTag(TestTag.NOTE_ITEM)[1]
+            .assertTextContains("2")
+        composeRule.onAllNodesWithTag(TestTag.NOTE_ITEM)[2]
+            .assertTextContains("1")
 
     }
+
+
 }
